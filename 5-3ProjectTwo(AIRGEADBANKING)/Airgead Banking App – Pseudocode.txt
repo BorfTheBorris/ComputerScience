@@ -1,0 +1,62 @@
+Airgead Banking App – Pseudocode
+By: Kyle McCrea
+
+DISPLAY a welcome message
+
+DO
+    REPEAT
+        READ Initial Investment Amount from user
+    UNTIL Initial Investment Amount > 0
+
+    REPEAT
+        READ Monthly Deposit Amount from user
+    UNTIL Monthly Deposit Amount >= 0
+
+    REPEAT
+        READ Annual Interest Rate from user
+    UNTIL Annual Interest Rate > 0
+
+    REPEAT
+        READ Number of Years from user
+    UNTIL Number of Years > 0
+
+    SET InvestmentCalculator object with user inputs
+
+    CALL calculateGrowthWithoutDeposits():
+        SET balance TO Initial Investment Amount
+        FOR each year from 1 to Number of Years
+            SET yearlyInterest TO 0
+            FOR each month from 1 to 12
+                CALCULATE monthlyInterest AS balance * ((Annual Interest Rate / 100) / 12)
+                INCREMENT balance BY monthlyInterest
+                INCREMENT yearlyInterest BY monthlyInterest
+            ENDFOR
+            STORE year, balance, yearlyInterest in yearly report list
+        ENDFOR
+        RETURN yearly report list
+
+    CALL printReport() from ReportPrinter with yearly report list and title
+        "Balance and Interest Without Additional Monthly Deposits"
+
+    CALL calculateGrowthWithDeposits():
+        SET balance TO Initial Investment Amount
+        FOR each year from 1 to Number of Years
+            SET yearlyInterest TO 0
+            FOR each month from 1 to 12
+                INCREMENT balance BY Monthly Deposit Amount
+                CALCULATE monthlyInterest AS balance * ((Annual Interest Rate / 100) / 12)
+                INCREMENT balance BY monthlyInterest
+                INCREMENT yearlyInterest BY monthlyInterest
+            ENDFOR
+            STORE year, balance, yearlyInterest in yearly report list
+        ENDFOR
+        RETURN yearly report list
+
+    CALL printReport() from ReportPrinter with yearly report list and title
+        "Balance and Interest With Additional Monthly Deposits"
+
+    DISPLAY "Would you like to try different values? (Y/N)"
+    READ user choice
+WHILE user choice is "Y" or "y"
+
+DISPLAY "Thank you for using Airgead Banking Investment App!"
